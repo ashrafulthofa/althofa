@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlThofa Fresh | Pure, Organic, Delivered</title>
+    <link rel="icon" type="image/png" href="Icon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-dark: #14281d;
+            --brand-accent: #9fad89;
+            --brand-light: #f4f6f5;
+            --fresh-green: #059669; /* Added for interactive elements */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'DM Sans', sans-serif; }
+        
+        body { background-color: var(--brand-light); color: var(--brand-dark); }
+        
+        /* Navbar */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 5%; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--brand-dark); text-decoration: none; }
+        .logo i { color: var(--brand-accent); margin-right: 5px; }
+        
+        .btn-brand {
+            background: var(--brand-dark); color: white; padding: 10px 25px;
+            text-decoration: none; border-radius: 8px; font-weight: 700;
+            transition: 0.3s; display: inline-block; cursor: pointer; border: none;
+        }
+        .btn-brand:hover { background: var(--brand-accent); transform: translateY(-2px); color: var(--brand-dark); }
+
+        /* Hero */
+        .hero {
+            padding: 4rem 5%; text-align: center;
+            /* Landscape Image - No People/Animals */
+            background: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            height: 70vh; display: flex; flex-direction: column; justify-content: center;
+            position: relative;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(20, 40, 29, 0.6);
+        }
+        .hero-content { position: relative; z-index: 1; color: white; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; color: #f0fdf4; }
+
+        /* Features */
+        .features {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; padding: 4rem 5%; margin-top: -50px; position: relative; z-index: 2;
+        }
+        .f-card {
+            background: white; padding: 30px; border-radius: 15px;
+            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .f-card i { font-size: 2.5rem; color: var(--brand-accent); margin-bottom: 15px; }
+        .f-card h3 { margin-bottom: 10px; }
+
+        /* Product Areas */
+        .products { padding: 4rem 5%; }
+        .p-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        
+        .p-item {
+            background: white; border-radius: 20px; overflow: hidden;
+            display: flex; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            cursor: pointer; transition: transform 0.3s;
+        }
+        .p-item:hover { transform: translateY(-5px); }
+        .p-img { width: 50%; height: 250px; object-fit: cover; }
+        .p-info { padding: 30px; width: 50%; }
+        .p-info h3 { color: var(--brand-dark); margin-bottom: 10px; }
+        .p-info p { color: #52635a; }
+
+        /* Trust Banner */
+        .trust-banner {
+            background: var(--brand-dark); color: white;
+            text-align: center; padding: 3rem 5%;
+        }
+
+        /* Footer */
+        footer { background: #0a1610; color: white; padding: 3rem 5%; text-align: center; }
+        .socials a { color: var(--brand-accent); margin: 0 10px; font-size: 1.5rem; }
+
+        /* MODAL STYLES */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.6); 
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 40px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus { color: var(--brand-dark); text-decoration: none; cursor: pointer; }
+
+        .modal-content h3 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--brand-dark); }
+        .modal-content p { color: #52635a; margin-bottom: 1.5rem; }
+
+        .contact-options {
+            display: flex; flex-direction: column; gap: 15px;
+        }
+
+        .btn-modal {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .whatsapp { background: #25D366; color: white; }
+        .facebook { background: #1877F2; color: white; }
+        .phone { background: var(--brand-dark); color: white; }
+        
+        .btn-modal:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            .p-grid { grid-template-columns: 1fr; }
+            .p-item { flex-direction: column; }
+            .p-img, .p-info { width: 100%; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo"><i class="fa-solid fa-leaf"></i> AlThofa Fresh</a>
+        <!-- BACKEND NEEDED: Link to Order Management System -->
+        <button onclick="openModal()" class="btn-brand">Order Now</button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Pure. Organic. Delivered.</h1>
+            <p>From our farms in Chattogram directly to your kitchen table.</p>
+            <button onclick="openModal()" class="btn-brand" style="background: white; color: var(--brand-dark); border: none;">View Products</button>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="f-card">
+            <i class="fa-solid fa-seedling"></i>
+            <h3>Chemical Free</h3>
+            <p>100% Organic vegetables.</p>
+        </div>
+        <div class="f-card">
+            <i class="fa-solid fa-truck-fast"></i>
+            <h3>Fast Delivery</h3>
+            <p>Fresh within hours.</p>
+        </div>
+        <div class="f-card">
+            <i class="fa-solid fa-tag"></i>
+            <h3>Fair Prices</h3>
+            <p>Direct from source.</p>
+        </div>
+    </section>
+
+    <!-- BACKEND NEEDED: Dynamic Product Loading from Database -->
+    <section id="products" class="products">
+        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Our Harvest</h2>
+        
+        <div class="p-grid">
+            <!-- Agro: Vegetable Basket (Object Only) -->
+            <div class="p-item" onclick="openModal()">
+                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=2070&auto=format&fit=crop" class="p-img" alt="Fresh Vegetables">
+                <div class="p-info">
+                    <h3>Organic Agro</h3>
+                    <p>Seasonal vegetables, rice, and spices grown without harmful pesticides.</p>
+                </div>
+            </div>
+            
+            <!-- Food Fish: Water/Texture (No living fish shown) -->
+            <div class="p-item" onclick="openModal()">
+                <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop" class="p-img" alt="Fresh Water Source">
+                <div class="p-info">
+                    <h3>Live Food Fish</h3>
+                    <p>Fresh Carp, Tilapia, and local varieties delivered fresh.</p>
+                </div>
+            </div>
+
+            <!-- Livestock: Milk Bottle/Glass (Object Only) -->
+            <div class="p-item" onclick="openModal()">
+                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=1974&auto=format&fit=crop" class="p-img" alt="Fresh Milk">
+                <div class="p-info">
+                    <h3>Dairy & Livestock</h3>
+                    <p>Pure milk and farm products raised in ethical environments.</p>
+                </div>
+            </div>
+
+            <!-- Grocery: Bag/Pantry (Object Only) -->
+            <div class="p-item" onclick="openModal()">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974&auto=format&fit=crop" class="p-img" alt="Grocery Essentials">
+                <div class="p-info">
+                    <h3>Daily Groceries</h3>
+                    <p>Oil, pulses, and daily essentials curated for quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-banner">
+        <h2>Taste the Real Difference.</h2>
+        <p style="margin-top: 10px;">We don't just sell food; we grow trust.</p>
+    </section>
+
+    <footer>
+        <div class="socials">
+            <a href="https://facebook.com/althofafresh"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://instagram.com/althofafresh"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p style="margin-top: 1rem;">&copy; 2026 AlThofa Fresh. A Division of AlThofa Group.</p>
+    </footer>
+
+    <!-- DEVELOPMENT MODAL -->
+    <div id="devModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Freshness Loading... 🌿</h3>
+            <p>Our online grocery store is currently under development to serve you better.</p>
+            <p style="font-weight: 500; color: var(--brand-dark); margin-bottom: 10px;">To place an order now, please contact us directly:</p>
+            
+            <div class="contact-options">
+                <a href="https://wa.me/8801648342737" target="_blank" class="btn-modal whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+                </a>
+                <a href="https://facebook.com/althofafresh" target="_blank" class="btn-modal facebook">
+                    <i class="fa-brands fa-facebook-f"></i> Message on Facebook
+                </a>
+                <a href="tel:+8801648342737" class="btn-modal phone">
+                    <i class="fa-solid fa-phone"></i> Call +880 1648 342737
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Logic
+        const modal = document.getElementById("devModal");
+
+        function openModal() {
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
