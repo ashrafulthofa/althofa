@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Algorithms Code</title>
+
+```
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px;
+        background: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .code-container {
+        max-width: 1000px;
+        margin: 0 auto 30px;
+        background: #1e1e1e;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background: #2d2d2d;
+        color: white;
+    }
+
+    .code-title {
+        font-weight: bold;
+    }
+
+    .copy-btn {
+        border: none;
+        padding: 7px 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #ffffff;
+        color: #222;
+        font-weight: bold;
+    }
+
+    .copy-btn:hover {
+        background: #dddddd;
+    }
+
+    pre {
+        margin: 0;
+        padding: 20px;
+        overflow-x: auto;
+        color: #f8f8f2;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    code {
+        font-family: Consolas, "Courier New", monospace;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 15px;
+        }
+
+        pre {
+            font-size: 13px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<h1>C++ Algorithms</h1>
+
+
+<!-- Bubble Sort -->
+<div class="code-container">
+    <div class="code-header">
+        <span class="code-title">Bubble Sort</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+    </div>
+
+    <pre><code>#include &lt;iostream&gt;
+```
+
+using namespace std;
+
+int main() {
+
+```
+int arr[] = {5, 3, 8, 4, 2};
+int n = 5;
+
+for(int i=0;i&lt;n-1;i++) {
+    for(int j=0;j&lt;n-i-1;j++) {
+        if(arr[j] &gt; arr[j+1]) {
+            swap(arr[j], arr[j+1]);
+        }
+    }
+}
+
+cout&lt;&lt;"Sorted Array: ";
+for(int i=0;i&lt;n;i++)
+    cout&lt;&lt;arr[i]&lt;&lt;" ";
+```
+
+}</code></pre> </div>
+
+```
+<!-- Insertion Sort -->
+<div class="code-container">
+    <div class="code-header">
+        <span class="code-title">Insertion Sort</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+    </div>
+
+    <pre><code>#include &lt;iostream&gt;
+
+
+```
+
+using namespace std;
+
+int main() {
+int arr[] = {5,3,8,4,2};
+int n=5;
+
+```
+for(int i=1;i&lt;n;i++) {
+    int key=arr[i];
+    int j=i-1;
+
+    while(j&gt;=0 &amp;&amp; arr[j]&gt;key) {
+        arr[j+1]=arr[j];
+        j--;
+    }
+
+    arr[j+1]=key;
+}
+
+cout&lt;&lt;"Sorted Array: ";
+for(int i=0;i&lt;n;i++)
+    cout&lt;&lt;arr[i]&lt;&lt;" ";
+```
+
+}</code></pre> </div>
+
+```
+<!-- BFS -->
+<div class="code-container">
+    <div class="code-header">
+        <span class="code-title">BFS - Breadth First Search</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+    </div>
+
+    <pre><code>#include &lt;iostream&gt;
+```
+
+#include <vector>
+#include <queue>
+using namespace std;
+
+vector<int> graph[100];
+bool visited[100];
+
+void bfs(int start) {
+queue<int> q;
+
+```
+q.push(start);
+visited[start] = true;
+
+while(!q.empty()) {
+    int node = q.front();
+    q.pop();
+
+    cout &lt;&lt; node &lt;&lt; " ";
+
+    for(int next : graph[node]) {
+        if(!visited[next]) {
+            visited[next] = true;
+            q.push(next);
+        }
+    }
+}
+```
+
+}
+
+int main() {
+int n, e;
+cin >> n >> e;
+
+```
+for(int i = 0; i &lt; e; i++) {
+    int u, v;
+    cin &gt;&gt; u &gt;&gt; v;
+
+    graph[u].push_back(v);
+    graph[v].push_back(u);
+}
+
+int start;
+cin &gt;&gt; start;
+
+bfs(start);
+
+return 0;
+```
+
+}</code></pre> </div>
+
+```
+<!-- DFS -->
+<div class="code-container">
+    <div class="code-header">
+        <span class="code-title">DFS - Depth First Search</span>
+        <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+    </div>
+
+    <pre><code>#include &lt;bits/stdc++.h&gt;
+```
+
+using namespace std;
+
+#define MAX 1000000
+vector<int> graph[MAX];
+vector<bool> visited;
+
+void dfs(int u){
+cout << u << " ";
+visited[u] = true;
+for(int i:graph)
+if(!visited[i]){
+dfs(i);
+}
+}
+
+int main() {
+
+```
+cout &lt;&lt; "Enter the number of nodes and edges: ";
+int node, edge;
+cin &gt;&gt; node &gt;&gt; edge;
+
+cout &lt;&lt; "Enter the graph: ";
+for(int i=0; i&lt;edge; i++){
+    int node1, node2;
+    cin &gt;&gt; node1 &gt;&gt; node2;
+    graph[node1].push_back(node2);
+    graph[node2].push_back(node1);
+}
+
+visited.assign(node+1,false);
+
+cout &lt;&lt; "Enter the starting node: ";
+int source;
+cin &gt;&gt; source;
+
+cout &lt;&lt; "DFS path is: ";
+dfs(source);
+
+return 0;
+```
+
+}</code></pre> </div>
+
+```
+<script>
+    function copyCode(button) {
+        const code = button
+            .closest(".code-container")
+            .querySelector("code")
+            .innerText;
+
+        navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.innerText;
+
+            button.innerText = "Copied!";
+
+            setTimeout(() => {
+                button.innerText = originalText;
+            }, 1500);
+        });
+    }
+</script>
+```
+
+</body>
+</html>
