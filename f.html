@@ -1,237 +1,191 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>C++ Algorithms</title>
+    <title>Algorithm Codes</title>
 
-<style>
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-        padding: 30px;
-        background: #f5f5f5;
-        font-family: Arial, sans-serif;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    /* NAVIGATION */
-    .navbar {
-        max-width: 1000px;
-        margin: 0 auto 25px;
-
-        display: flex;
-        gap: 8px;
-
-        background: #222;
-        padding: 8px;
-
-        border-radius: 8px;
-
-        overflow-x: auto;
-    }
-
-    .nav-btn {
-        flex: 1;
-
-        min-width: 140px;
-
-        padding: 12px 18px;
-
-        border: none;
-        border-radius: 6px;
-
-        background: #333;
-        color: white;
-
-        font-weight: bold;
-
-        cursor: pointer;
-
-        white-space: nowrap;
-    }
-
-    .nav-btn:hover {
-        background: #444;
-    }
-
-    .nav-btn.active {
-        background: white;
-        color: #222;
-    }
-
-    /* CODE BOX */
-    .code-container {
-        max-width: 1000px;
-
-        margin: auto;
-
-        background: #1e1e1e;
-
-        border-radius: 10px;
-
-        overflow: hidden;
-
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    .code-header {
-        display: flex;
-
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 12px 16px;
-
-        background: #2d2d2d;
-
-        color: white;
-    }
-
-    .code-title {
-        font-weight: bold;
-    }
-
-    .copy-btn {
-        border: none;
-
-        padding: 7px 14px;
-
-        border-radius: 5px;
-
-        cursor: pointer;
-
-        background: white;
-        color: #222;
-
-        font-weight: bold;
-    }
-
-    .copy-btn:hover {
-        background: #ddd;
-    }
-
-    pre {
-        margin: 0;
-
-        padding: 20px;
-
-        overflow-x: auto;
-
-        color: #f8f8f2;
-
-        font-size: 15px;
-
-        line-height: 1.5;
-    }
-
-    code {
-        font-family: Consolas, "Courier New", monospace;
-    }
-
-    /* CODE SECTIONS */
-    .code-section {
-        display: none;
-    }
-
-    .code-section.active {
-        display: block;
-    }
-
-    @media (max-width: 600px) {
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: #222;
             padding: 15px;
+
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        nav button {
+            border: none;
+            background: #444;
+            color: white;
+
+            padding: 12px 25px;
+            border-radius: 6px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        nav button:hover {
+            background: #666;
+        }
+
+        nav button:active {
+            transform: scale(0.95);
+        }
+
+        /* MAIN */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* CODE BOX */
+        .code-box {
+            background: #1e1e1e;
+            color: #f8f8f2;
+
+            padding: 25px;
+            border-radius: 10px;
+
+            overflow-x: auto;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
 
         pre {
-            font-size: 13px;
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.6;
         }
-    }
-</style>
-```
 
+        /* COPY MESSAGE */
+        #message {
+            position: fixed;
+
+            bottom: 25px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            background: #222;
+            color: white;
+
+            padding: 12px 20px;
+            border-radius: 6px;
+
+            display: none;
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            nav button {
+                padding: 10px 15px;
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+
+            pre {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-```
-<h1>C++ Algorithms</h1>
+    <!-- NAVIGATION -->
+    <nav>
 
-
-<!-- NAVIGATION -->
-
-<div class="navbar">
-
-    <button class="nav-btn active"
-            onclick="showCode('bfs', this)">
-        BFS
-    </button>
-
-    <button class="nav-btn"
-            onclick="showCode('dfs', this)">
-        DFS
-    </button>
-
-    <button class="nav-btn"
-            onclick="showCode('bubble', this)">
-        BUBBLE SORT
-    </button>
-
-    <button class="nav-btn"
-            onclick="showCode('insertion', this)">
-        INSERTION SORT
-    </button>
-
-</div>
-
-
-<!-- CODE DISPLAY -->
-
-<div id="code-container" class="code-container">
-
-    <div class="code-header">
-
-        <span id="code-title" class="code-title">
-            BFS - Breadth First Search
-        </span>
-
-        <button id="copy-button"
-                class="copy-btn"
-                onclick="copyCode()">
-            Copy Code
+        <button onclick="copyCode('bfs')">
+            BFS
         </button>
+
+        <button onclick="copyCode('dfs')">
+            DFS
+        </button>
+
+        <button onclick="copyCode('bubble')">
+            BUBBLE
+        </button>
+
+        <button onclick="copyCode('insert')">
+            INSERT
+        </button>
+
+    </nav>
+
+
+    <!-- CONTENT -->
+    <div class="container">
+
+        <h1>Algorithm Codes</h1>
+
+        <p class="subtitle">
+            Click a button above to copy the C++ code
+        </p>
+
+        <div class="code-box">
+            <pre id="code">Click an algorithm button to copy its code.</pre>
+        </div>
 
     </div>
 
-    <pre><code id="code-display"></code></pre>
 
-</div>
+    <!-- COPY MESSAGE -->
+    <div id="message">
+        Code Copied!
+    </div>
 
 
-<script>
+    <script>
 
-    /*
-    ============================================================
-    EXACT ORIGINAL C++ CODE
-    ============================================================
-    */
+        const codes = {
 
-    const codes = {
-
-        bfs: `#include <iostream>
-```
-
+            bfs: `#include <iostream>
 #include <vector>
 #include <queue>
 using namespace std;
@@ -240,298 +194,171 @@ vector<int> graph[100];
 bool visited[100];
 
 void bfs(int start) {
-queue<int> q;
+    queue<int> q;
 
-```
-q.push(start);
-visited[start] = true;
+    q.push(start);
+    visited[start] = true;
 
-while(!q.empty()) {
-    int node = q.front();
-    q.pop();
+    while(!q.empty()) {
+        int node = q.front();
+        q.pop();
+
+        cout << node << " ";
+
+        for(int next : graph[node]) {
+            if(!visited[next]) {
+                visited[next] = true;
+                q.push(next);
+            }
+        }
+    }
+}
+
+int main() {
+    int n, e;
+    cin >> n >> e;
+
+    for(int i = 0; i < e; i++) {
+        int u, v;
+        cin >> u >> v;
+
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+    }
+
+    int start;
+    cin >> start;
+
+    bfs(start);
+
+    return 0;
+}`,
+
+
+
+            dfs: `#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> graph[100];
+bool visited[100];
+
+void dfs(int node) {
+    visited[node] = true;
 
     cout << node << " ";
 
     for(int next : graph[node]) {
         if(!visited[next]) {
-            visited[next] = true;
-            q.push(next);
-        }
-    }
-}
-```
-
-}
-
-int main() {
-int n, e;
-cin >> n >> e;
-
-```
-for(int i = 0; i < e; i++) {
-    int u, v;
-    cin >> u >> v;
-
-    graph[u].push_back(v);
-    graph[v].push_back(u);
-}
-
-int start;
-cin >> start;
-
-bfs(start);
-
-return 0;
-```
-
-}`,
-
-```
-        dfs: `#include <bits/stdc++.h>
-```
-
-using namespace std;
-
-#define MAX 1000000
-vector<int> graph[MAX];
-vector<bool> visited;
-
-void dfs(int u){
-cout << u << " ";
-visited[u] = true;
-for(int i:graph)
-if(!visited[i]){
-dfs(i);
-}
-}
-
-int main() {
-
-```
-cout << "Enter the number of nodes and edges: ";
-int node, edge;
-cin >> node >> edge;
-
-cout << "Enter the graph: ";
-for(int i=0; i<edge; i++){
-    int node1, node2;
-    cin >> node1 >> node2;
-    graph[node1].push_back(node2);
-    graph[node2].push_back(node1);
-}
-
-visited.assign(node+1,false);
-
-cout << "Enter the starting node: ";
-int source;
-cin >> source;
-
-cout << "DFS path is: ";
-dfs(source);
-
-return 0;
-```
-
-}`,
-
-```
-        bubble: `#include <iostream>
-```
-
-using namespace std;
-
-int main() {
-
-```
-int arr[] = {5, 3, 8, 4, 2};
-int n = 5;
-
-for(int i=0;i<n-1;i++) {
-    for(int j=0;j<n-i-1;j++) {
-        if(arr[j] > arr[j+1]) {
-            swap(arr[j], arr[j+1]);
+            dfs(next);
         }
     }
 }
 
-cout<<"Sorted Array: ";
-for(int i=0;i<n;i++)
-    cout<<arr[i]<<" ";
-```
+int main() {
+    int n, e;
+    cin >> n >> e;
 
+    for(int i = 0; i < e; i++) {
+        int u, v;
+        cin >> u >> v;
+
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+    }
+
+    int start;
+    cin >> start;
+
+    dfs(start);
+
+    return 0;
 }`,
 
-```
-        insertion: `#include <iostream>
 
 
-```
-
+            bubble: `#include <iostream>
 using namespace std;
 
 int main() {
-int arr[] = {5,3,8,4,2};
-int n=5;
 
-```
-for(int i=1;i<n;i++) {
-    int key=arr[i];
-    int j=i-1;
+    int arr[] = {5, 3, 8, 4, 2};
+    int n = 5;
 
-    while(j>=0 && arr[j]>key) {
-        arr[j+1]=arr[j];
-        j--;
+    for(int i = 0; i < n - 1; i++) {
+
+        for(int j = 0; j < n - i - 1; j++) {
+
+            if(arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+
+        }
     }
 
-    arr[j+1]=key;
-}
+    cout << "Sorted Array: ";
 
-cout<<"Sorted Array: ";
-for(int i=0;i<n;i++)
-    cout<<arr[i]<<" ";
-```
+    for(int i = 0; i < n; i++)
+        cout << arr[i] << " ";
 
+    return 0;
+}`,
+
+
+
+            insert: `#include <iostream>
+using namespace std;
+
+int main() {
+
+    int arr[] = {5, 3, 8, 4, 2};
+    int n = 5;
+
+    for(int i = 1; i < n; i++) {
+
+        int key = arr[i];
+        int j = i - 1;
+
+        while(j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = key;
+    }
+
+    cout << "Sorted Array: ";
+
+    for(int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+
+    return 0;
 }`
-};
 
-```
-    /*
-    ============================================================
-    TITLES
-    ============================================================
-    */
-
-    const titles = {
-
-        bfs: "BFS - Breadth First Search",
-
-        dfs: "DFS - Depth First Search",
-
-        bubble: "Bubble Sort",
-
-        insertion: "Insertion Sort"
-
-    };
+        };
 
 
-    /*
-    ============================================================
-    SHOW CODE
-    ============================================================
-    */
+        function copyCode(algorithm) {
 
-    function showCode(id, button) {
+            const code = codes[algorithm];
 
-        // Display code
-        document.getElementById("code-display").textContent =
-            codes[id];
+            // Copy code
+            navigator.clipboard.writeText(code);
 
-        // Change title
-        document.getElementById("code-title").textContent =
-            titles[id];
+            // Show code on page
+            document.getElementById("code").textContent = code;
 
+            // Show message
+            const message = document.getElementById("message");
 
-        // Remove active from all buttons
+            message.style.display = "block";
 
-        const buttons =
-            document.querySelectorAll(".nav-btn");
-
-        buttons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
-
-        // Activate clicked button
-
-        button.classList.add("active");
-
-
-        // Reset copy button
-
-        document.getElementById("copy-button").textContent =
-            "Copy Code";
-    }
-
-
-    /*
-    ============================================================
-    COPY EXACT CODE
-    ============================================================
-    */
-
-    function copyCode() {
-
-        const activeButton =
-            document.querySelector(".nav-btn.active");
-
-
-        let id;
-
-
-        if (activeButton.textContent.trim() === "BFS") {
-
-            id = "bfs";
-
-        } else if (activeButton.textContent.trim() === "DFS") {
-
-            id = "dfs";
-
-        } else if (
-            activeButton.textContent.trim() === "BUBBLE SORT"
-        ) {
-
-            id = "bubble";
-
-        } else {
-
-            id = "insertion";
-
+            setTimeout(() => {
+                message.style.display = "none";
+            }, 1500);
         }
 
-
-        /*
-        Copy the ORIGINAL C++ code,
-        NOT the displayed HTML.
-        */
-
-        navigator.clipboard.writeText(codes[id])
-            .then(() => {
-
-                const button =
-                    document.getElementById("copy-button");
-
-                button.textContent = "Copied!";
-
-
-                setTimeout(() => {
-
-                    button.textContent = "Copy Code";
-
-                }, 1500);
-
-            })
-
-            .catch(() => {
-
-                alert("Unable to copy code.");
-
-            });
-    }
-
-
-    /*
-    ============================================================
-    LOAD BFS BY DEFAULT
-    ============================================================
-    */
-
-    document.getElementById("code-display").textContent =
-        codes.bfs;
-
-</script>
-```
+    </script>
 
 </body>
 </html>
